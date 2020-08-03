@@ -22,9 +22,12 @@ import com.sg.employeeportal.service.IEmployeeService;
 import com.sg.employeeportal.util.CustomErrorType;
 import com.sg.employeeportal.util.StandardValidationHelper;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/employee")
 @CrossOrigin
+@Tag(name = "Employee", description = "The Employee API")
 public class EmployeeController {
 	private static final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
 

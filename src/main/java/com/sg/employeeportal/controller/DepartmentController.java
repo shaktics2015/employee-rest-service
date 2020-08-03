@@ -20,9 +20,12 @@ import com.sg.employeeportal.service.IDepartmentService;
 import com.sg.employeeportal.util.CustomErrorType;
 import com.sg.employeeportal.util.StandardValidationHelper;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/department")
 @CrossOrigin
+@Tag(name = "Department", description = "The Department API")
 public class DepartmentController {
 	private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
 

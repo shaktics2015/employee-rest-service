@@ -1,13 +1,25 @@
 # Employee Portal REST API Server  
 
-## Run the App with TestCases
+## To run App with TestCases
 
     mvn -P runWithTest
 
-## Run the App
+## To run App
 
     mvn spring-boot:run
 
+
+### Swagger URL
+
+`http://localhost:8080/api/swagger-ui/index.html?configUrl=/api/v3/api-docs/swagger-config#/`
+
+### h2 DB URL
+
+`http://localhost:8080/api/db/`
+	{
+		username: sa,
+		password: secret
+	}	
 
 ## REST APIs
  

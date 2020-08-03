@@ -9,6 +9,7 @@ import  com.sg.employeeportal.service.AuditorAwareImpl;
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 class JpaConfig {
+	
     @Bean
     public AuditorAware<String> auditorAware() {
         return new AuditorAwareImpl();

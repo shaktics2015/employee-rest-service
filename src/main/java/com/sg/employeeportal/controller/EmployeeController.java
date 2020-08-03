@@ -48,17 +48,21 @@ public class EmployeeController {
 
 	@PostMapping("/create")
 	public ResponseEntity<?> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-		
+
 		StandardValidationHelper validationHelper = new StandardValidationHelper();
 
+		validationHelper.objectNotNull("employee", employeeDTO, "Blank request not allowed");
+
 		validationHelper.objectNotNull("firstName", employeeDTO.getFirstName(), "First Name cannot be null.");
-		
-		validationHelper.isAlpha("firstName",  employeeDTO.getFirstName());
+
+		if (employeeDTO.getFirstName() != null)
+			validationHelper.isAlpha("firstName", employeeDTO.getFirstName());
 
 		validationHelper.objectNotNull("lastName", employeeDTO.getLastName(), "Last Name cannot be null.");
-	
-		validationHelper.isAlpha("lastName",  employeeDTO.getLastName());
-		
+
+		if (employeeDTO.getLastName() != null)
+			validationHelper.isAlpha("lastName", employeeDTO.getLastName());
+
 		validationHelper.objectNotNull("gender", employeeDTO.getGender(), "Gender cannot be null.");
 
 		validationHelper.objectNotNull("dob", employeeDTO.getDob(), "Date fo Birth cannot be null.");
@@ -66,8 +70,7 @@ public class EmployeeController {
 		validationHelper.objectNotNull("department", employeeDTO.getDepartment(), "Department cannot be null.");
 
 		if (validationHelper.hasValidationErrors()) {
-			return new ResponseEntity(validationHelper.getValidationErrors(),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity(validationHelper.getValidationErrors(), HttpStatus.BAD_REQUEST);
 		}
 
 		Department department = departmentService.findById(employeeDTO.getDepartment());

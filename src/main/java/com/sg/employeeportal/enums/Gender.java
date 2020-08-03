@@ -1,4 +1,5 @@
 package com.sg.employeeportal.enums;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -16,12 +17,12 @@ public enum Gender {
 	@JsonValue
 	public int getValue() {
 		return value;
-	} 
+	}
 
 	Gender(int value) {
 		this.value = value;
 	}
-	
+
 	@JsonCreator
 	public static Gender parse(int value) {
 		for (Gender e : Gender.values()) {
@@ -30,10 +31,10 @@ public enum Gender {
 		}
 		return Gender.MALE;
 	}
-	
-	 @Override
-	    public String toString() {
-	        return this.name();
-	    }
-	  
+
+	@Override
+	public String toString() {
+		return this.name();
+	}
+
 }

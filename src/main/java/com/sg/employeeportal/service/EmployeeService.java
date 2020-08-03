@@ -28,8 +28,8 @@ public class EmployeeService implements IEmployeeService {
 		employee.setFirstName(employeeDTO.getFirstName());
 		employee.setLastName(employeeDTO.getLastName());
 		employee.setGender(Gender.parse(employeeDTO.getGender()));
-		employee.setDob(employeeDTO.getDob()); 
+		employee.setDob(employeeDTO.getDob());
 		employee.setDepartment(department);
 		return repository.save(employee);
-	} 
+	}
 }

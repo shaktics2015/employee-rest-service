@@ -43,16 +43,15 @@ public class DepartmentController {
 
 	@PostMapping("/create")
 	public ResponseEntity<?> createEmployee(@RequestBody DepartmentDTO departmentDTO) {
-		
+
 		StandardValidationHelper validationHelper = new StandardValidationHelper();
 
 		validationHelper.objectNotNull("name", departmentDTO.getName(), "Name cannot be null.");
 
 		if (validationHelper.hasValidationErrors()) {
-			return new ResponseEntity(validationHelper.getValidationErrors(),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity(validationHelper.getValidationErrors(), HttpStatus.BAD_REQUEST);
 		}
-		
+
 		Department department = service.findByName(departmentDTO.getName());
 
 		if (department != null) {

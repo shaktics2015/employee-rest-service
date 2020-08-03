@@ -88,8 +88,8 @@ public class EmployeeServiceTest implements TestProps {
 		assertNotNull(response);
 		assertEmployee(response);
 	}
-	
-	private void assertEmployee(Employee employeeRes ) {
+
+	private void assertEmployee(Employee employeeRes) {
 		assertEquals(employee.getFirstName(), employeeRes.getFirstName());
 		assertEquals(employee.getLastName(), employeeRes.getLastName());
 		assertEquals(employee.getGender(), employeeRes.getGender());

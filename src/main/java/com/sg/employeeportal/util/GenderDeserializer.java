@@ -11,22 +11,22 @@ import com.sg.employeeportal.enums.Gender;
 
 public class GenderDeserializer extends JsonDeserializer<Gender> {
 
-    @Override
-    public Gender deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+	@Override
+	public Gender deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
-        ObjectCodec oc = jsonParser.getCodec();
-        JsonNode node = oc.readTree(jsonParser);
+		ObjectCodec oc = jsonParser.getCodec();
+		JsonNode node = oc.readTree(jsonParser);
 
-        if (node == null) {
-            return null;
-        }
+		if (node == null) {
+			return null;
+		}
 
-        int val = node.intValue(); // gives "A" from the request
+		int val = node.intValue(); // gives "A" from the request
 
-        if (val == 0) {
-            return null;
-        }
+		if (val == 0) {
+			return null;
+		}
 
-        return Gender.parse(val);
-    }
+		return Gender.parse(val);
+	}
 }

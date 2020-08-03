@@ -26,7 +26,7 @@ import com.sun.istack.NotNull;
 @Entity
 @Table(name = "EMPLOYEE")
 @NamedQuery(name = "Employee.findAll", query = "SELECT emp FROM Employee emp ORDER BY firstName ASC")
-public class Employee extends Auditable<String>{ 
+public class Employee extends Auditable<String> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +40,7 @@ public class Employee extends Auditable<String>{
 
 	@Column(name = "GENDER")
 	@Enumerated(EnumType.STRING)
-    @JsonProperty("gender")
+	@JsonProperty("gender")
 	private Gender gender;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -48,9 +48,9 @@ public class Employee extends Auditable<String>{
 	@JsonDeserialize(using = CustomerDateAndTimeDeserialize.class)
 	private Date dob;
 
-	@OneToOne(cascade = CascadeType.ALL)
-    @NotNull	
-    private Department department;
+	@OneToOne(cascade = CascadeType.MERGE)
+	@NotNull
+	private Department department;
 
 	public Employee() {
 

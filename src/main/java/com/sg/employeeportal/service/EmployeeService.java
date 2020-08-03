@@ -2,8 +2,6 @@ package com.sg.employeeportal.service;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +13,6 @@ import com.sg.employeeportal.repository.EmployeeRepository;
 
 @Service
 public class EmployeeService implements IEmployeeService {
-
-	private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
 
 	@Autowired
 	private EmployeeRepository repository;
@@ -32,8 +28,7 @@ public class EmployeeService implements IEmployeeService {
 		employee.setFirstName(employeeDTO.getFirstName());
 		employee.setLastName(employeeDTO.getLastName());
 		employee.setGender(Gender.parse(employeeDTO.getGender()));
-		employee.setDob(employeeDTO.getDob());
-		LOG.info("save Employee : {}", employee);
+		employee.setDob(employeeDTO.getDob()); 
 		employee.setDepartment(department);
 		return repository.save(employee);
 	} 

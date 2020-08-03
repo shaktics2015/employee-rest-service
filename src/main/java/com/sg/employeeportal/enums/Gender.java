@@ -1,9 +1,10 @@
 package com.sg.employeeportal.enums;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.sg.employeeportal.exception.UnknownEnumValueException;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.sg.employeeportal.util.GenderDeserializer;
 
+@JsonDeserialize(using = GenderDeserializer.class)
 public enum Gender {
 
 	MALE(1),
@@ -15,27 +16,13 @@ public enum Gender {
 	@JsonValue
 	public int getValue() {
 		return value;
-	}
-
-	@JsonCreator
-	public static Gender of(Integer value) {
-		if (null == value) {
-			return null;
-		}
-
-		for (Gender item : Gender.values()) {
-			if (value.equals(item.getValue())) {
-				return item;
-			}
-		}
-
-		throw new UnknownEnumValueException("Gender: unknown value: " + value);
-	}
+	} 
 
 	Gender(int value) {
 		this.value = value;
 	}
-
+	
+	@JsonCreator
 	public static Gender parse(int value) {
 		for (Gender e : Gender.values()) {
 			if (e.getValue() == value)
@@ -43,4 +30,10 @@ public enum Gender {
 		}
 		return Gender.MALE;
 	}
+	
+	 @Override
+	    public String toString() {
+	        return this.name();
+	    }
+	  
 }

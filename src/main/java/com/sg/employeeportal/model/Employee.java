@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sg.employeeportal.enums.Gender;
 import com.sg.employeeportal.util.CustomerDateAndTimeDeserialize;
@@ -24,7 +25,7 @@ import com.sg.employeeportal.util.CustomerDateAndTimeDeserialize;
 @Entity
 @Table(name = "EMPLOYEE")
 @NamedQuery(name = "Employee.findAll", query = "SELECT emp FROM Employee emp ORDER BY firstName ASC")
-public class Employee extends Auditable<String> {
+public class Employee extends Auditable<String>{ 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,6 +39,7 @@ public class Employee extends Auditable<String> {
 
 	@Column(name = "GENDER")
 	@Enumerated(EnumType.STRING)
+    @JsonProperty("gender")
 	private Gender gender;
 
 	@Temporal(TemporalType.TIMESTAMP)

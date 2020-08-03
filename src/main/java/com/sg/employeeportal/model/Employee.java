@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sg.employeeportal.enums.Gender;
 import com.sg.employeeportal.util.CustomerDateAndTimeDeserialize;
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "EMPLOYEE")
@@ -48,7 +49,8 @@ public class Employee extends Auditable<String>{
 	private Date dob;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private Department department;
+    @NotNull	
+    private Department department;
 
 	public Employee() {
 

@@ -18,6 +18,7 @@ import com.sg.employeeportal.dto.DepartmentDTO;
 import com.sg.employeeportal.model.Department;
 import com.sg.employeeportal.service.IDepartmentService;
 import com.sg.employeeportal.util.CustomErrorType;
+import com.sg.employeeportal.util.StandardValidationHelper;
 
 @RestController
 @RequestMapping("/department")
@@ -39,7 +40,16 @@ public class DepartmentController {
 
 	@PostMapping("/create")
 	public ResponseEntity<?> createEmployee(@RequestBody DepartmentDTO departmentDTO) {
+		
+		StandardValidationHelper validationHelper = new StandardValidationHelper();
 
+		validationHelper.objectNotNull("name", departmentDTO.getName(), "Name cannot be null.");
+
+		if (validationHelper.hasValidationErrors()) {
+			return new ResponseEntity(validationHelper.getValidationErrors(),
+					HttpStatus.BAD_REQUEST);
+		}
+		
 		Department department = service.findByName(departmentDTO.getName());
 
 		if (department != null) {

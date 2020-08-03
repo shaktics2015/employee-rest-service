@@ -20,6 +20,7 @@ import com.sg.employeeportal.model.Employee;
 import com.sg.employeeportal.service.IDepartmentService;
 import com.sg.employeeportal.service.IEmployeeService;
 import com.sg.employeeportal.util.CustomErrorType;
+import com.sg.employeeportal.util.StandardValidationHelper;
 
 @RestController
 @RequestMapping("/employee")
@@ -44,7 +45,27 @@ public class EmployeeController {
 
 	@PostMapping("/create")
 	public ResponseEntity<?> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-		LOG.info("Creating Employee : {}", employeeDTO);
+		
+		StandardValidationHelper validationHelper = new StandardValidationHelper();
+
+		validationHelper.objectNotNull("firstName", employeeDTO.getFirstName(), "First Name cannot be null.");
+		
+		validationHelper.isAlpha("firstName",  employeeDTO.getFirstName());
+
+		validationHelper.objectNotNull("lastName", employeeDTO.getLastName(), "Last Name cannot be null.");
+	
+		validationHelper.isAlpha("lastName",  employeeDTO.getLastName());
+		
+		validationHelper.objectNotNull("gender", employeeDTO.getGender(), "Gender cannot be null.");
+
+		validationHelper.objectNotNull("dob", employeeDTO.getDob(), "Date fo Birth cannot be null.");
+
+		validationHelper.objectNotNull("department", employeeDTO.getDepartment(), "Department cannot be null.");
+
+		if (validationHelper.hasValidationErrors()) {
+			return new ResponseEntity(validationHelper.getValidationErrors(),
+					HttpStatus.BAD_REQUEST);
+		}
 
 		Department department = departmentService.findById(employeeDTO.getDepartment());
 
